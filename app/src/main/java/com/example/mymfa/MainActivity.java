@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     private void getVoice() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
-            audioChecker.setPath(this.getExternalFilesDir(Environment.DIRECTORY_DCIM) + "/"  + "recordingAudio.mp3");
+            audioChecker.setPath(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/"  + "recordingAudio.mp3");
             // path = this.getExternalFilesDir
             // (Environment.DIRECTORY_DCIM) + "/"  + "recordingAudio.mp3";
         }
