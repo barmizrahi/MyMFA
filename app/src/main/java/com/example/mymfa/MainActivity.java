@@ -46,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
     private boolean boolBattery;
     private boolean boolPass;
     private boolean boolAirPlane;
-
+    private int level;
     private final int REQUEST_CODE_PERMISSION_CONTACTS = 900;
     //private final int REQUEST_CODE_PERMISSION_CAMERA = 901;
     private final int REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 902;
     private final int REQUEST_CODE_PERMISSION_MICROPHONE = 903;
-    private final String PASSWORD = "1";
+    private final String PASSWORD = "Bar";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkPassWord() {
-        if(PASSWORD.equals(passWord.getText().toString()))
+        String checkPass = PASSWORD+level;
+        if(checkPass.equals(passWord.getText().toString()))
             boolPass = true;
         else
             boolPass = false;
@@ -102,16 +103,14 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context context, Intent intent) {
-            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-            int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-            float batteryPct = level * 100 / (float)scale;
-            if(batteryPct > 40){
+           level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+          //  int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+           // float batteryPct = level * 100 / (float)scale;
+            if(level > 40){
                 boolBattery = true;
             }
             else
                 boolBattery = false;
-            String b = String.valueOf(batteryPct) + "%";
-
         }
     };
     private void getVoice() {
@@ -193,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
             case REQUEST_CODE_PERMISSION_CONTACTS: {
 
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(MainActivity.this, "Contacts ok", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(MainActivity.this, "Contacts ok", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
                 }
